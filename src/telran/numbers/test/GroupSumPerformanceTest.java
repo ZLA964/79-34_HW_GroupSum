@@ -15,6 +15,6 @@ public class GroupSumPerformanceTest {
         long start = System.currentTimeMillis();
         int sum = groupSum.computeSum();
         long finish = System.currentTimeMillis();
-        System.out.println("test name: " + name + " , duration: " + (finish - start) + " , sum = " + sum);
+        System.out.println("test name: " + name + "\t, duration: " + (finish - start) + " , sum = " + sum);
     }
 }

@@ -9,27 +9,27 @@ import java.util.concurrent.TimeUnit;
 
 public class ExecutorGroupSum extends GroupSum {
 
-    private final int N_THREADS;
+    private final int N_TASKS;
     private final OneGroupSum[] tasks;
     private final int poolSize;
 
     public ExecutorGroupSum(int[][] numberGroups) {
         super(numberGroups);
-        N_THREADS = numberGroups.length;
+        N_TASKS = numberGroups.length;
 //        this.poolSize = Runtime.getRuntime().availableProcessors();
         poolSize=4;
-        this.tasks = new OneGroupSum[N_THREADS];
+        this.tasks = new OneGroupSum[N_TASKS];
+        for(int i = 0; i< N_TASKS; i++){
+            tasks[i] = new OneGroupSum(numberGroups[i]);}
     }
 
 
 
     @Override
     public int computeSum() {
-
-        System.out.println("poolSize -> " + poolSize);
+//        System.out.println("poolSize -> " + poolSize);
         ExecutorService executorService = Executors.newFixedThreadPool(poolSize);
-        for(int i=0; i<N_THREADS; i++){
-            tasks[i] = new OneGroupSum(numberGroups[i]);
+        for(int i = 0; i< N_TASKS; i++){
             executorService.execute(tasks[i]);
         }
         executorService.shutdown(); // выполнение всех задач в очереди.

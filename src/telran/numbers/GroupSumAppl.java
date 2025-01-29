@@ -9,7 +9,7 @@ public class GroupSumAppl {
     private static final int N_GROUPS = 10_000;
     private static final int NUMBERS_PER_GROUP = 10_000;
     private static final int[][] numbers = new int[N_GROUPS][NUMBERS_PER_GROUP];
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     public static void main(String[] args) {
         long start0 = System.currentTimeMillis();
@@ -18,14 +18,22 @@ public class GroupSumAppl {
         GroupSum executorGroupSum = new ExecutorGroupSum(numbers);
         GroupSum streamGroupSum = new ParallelStreamGroupSum(numbers);
         GroupSum peekStreamGroupSum = new ParallelPeekStreamGroupSum(numbers);
+        GroupSum optimalThreadGroupSum = new OptimalThreadGroupSum(numbers);
         long finich0 = System.currentTimeMillis();
         System.out.println("time to prepare tests -> " + (finich0-start0));
 
         start0 = System.currentTimeMillis();
-        new GroupSumPerformanceTest( "ThreadGroupSum", threadGroupSum).runTest();
-        new GroupSumPerformanceTest("StreamGroupSum", streamGroupSum ).runTest();
-        new GroupSumPerformanceTest("PEEK StreamGroupSum", peekStreamGroupSum ).runTest();
-        new GroupSumPerformanceTest("ExecutorGroupSum", executorGroupSum).runTest();
+        new GroupSumPerformanceTest("Executor Group Sum", executorGroupSum).runTest();
+        new GroupSumPerformanceTest("Executor Group Sum", executorGroupSum).runTest();
+        new GroupSumPerformanceTest( "OptimalThread Sum", optimalThreadGroupSum).runTest();
+        new GroupSumPerformanceTest( "OptimalThread Sum", optimalThreadGroupSum).runTest();
+        new GroupSumPerformanceTest( " Thread Group Sum", threadGroupSum).runTest();
+        new GroupSumPerformanceTest( " Thread Group Sum", threadGroupSum).runTest();
+        new GroupSumPerformanceTest("    StreamGroupSum", streamGroupSum ).runTest();
+        new GroupSumPerformanceTest("PeekStreamGroupSum", peekStreamGroupSum ).runTest();
+        new GroupSumPerformanceTest( "OptimalThread Sum", optimalThreadGroupSum).runTest();
+        new GroupSumPerformanceTest( " Thread Group Sum", threadGroupSum).runTest();
+
 
 
 
