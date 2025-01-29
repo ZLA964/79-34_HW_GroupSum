@@ -5,11 +5,11 @@ import telran.numbers.task.OneGroupSum;
 import java.util.Arrays;
 
 
-public class ParallelStreamGroupSum extends GroupSum {
+public class ParallelPeekStreamGroupSum extends GroupSum {
 
     private final OneGroupSum[] tasks;
 
-    public ParallelStreamGroupSum(int[][] numberGroups) {
+    public ParallelPeekStreamGroupSum(int[][] numberGroups) {
         super(numberGroups);
         int numTasks = numberGroups.length;
         this.tasks = new OneGroupSum[numTasks];
@@ -22,10 +22,8 @@ public class ParallelStreamGroupSum extends GroupSum {
     public int computeSum() {
         return Arrays.stream(tasks)
                 .parallel()
-                .mapToInt(tasks -> {
-                    tasks.run();
-                    return tasks.getSum();
-                })
+                .peek(OneGroupSum::run)
+                .mapToInt(OneGroupSum::getSum)
                 .sum();
     }
 
