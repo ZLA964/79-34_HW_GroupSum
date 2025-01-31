@@ -19,6 +19,7 @@ public class GroupSumAppl {
         GroupSum streamGroupSum = new ParallelStreamGroupSum(numbers);
         GroupSum peekStreamGroupSum = new ParallelPeekStreamGroupSum(numbers);
         GroupSum optimalThreadGroupSum = new OptimalThreadGroupSum(numbers);
+        GroupSum eduardParallelStreamGroupSum = new EduardParallelStreamGroupSum(numbers);
         long finich0 = System.currentTimeMillis();
         System.out.println("time to prepare tests -> " + (finich0-start0));
 
@@ -30,7 +31,12 @@ public class GroupSumAppl {
         new GroupSumPerformanceTest( " Thread Group Sum", threadGroupSum).runTest();
         new GroupSumPerformanceTest( " Thread Group Sum", threadGroupSum).runTest();
         new GroupSumPerformanceTest("    StreamGroupSum", streamGroupSum ).runTest();
+        new GroupSumPerformanceTest("    StreamGroupSum", streamGroupSum ).runTest();
         new GroupSumPerformanceTest("PeekStreamGroupSum", peekStreamGroupSum ).runTest();
+        new GroupSumPerformanceTest("PeekStreamGroupSum", peekStreamGroupSum ).runTest();
+        new GroupSumPerformanceTest("EduardParallelStream", eduardParallelStreamGroupSum ).runTest();
+        new GroupSumPerformanceTest("EduardParallelStream", eduardParallelStreamGroupSum ).runTest();
+        
         new GroupSumPerformanceTest( "OptimalThread Sum", optimalThreadGroupSum).runTest();
         new GroupSumPerformanceTest( " Thread Group Sum", threadGroupSum).runTest();
 

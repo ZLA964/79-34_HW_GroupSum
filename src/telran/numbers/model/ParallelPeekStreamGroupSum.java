@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 
 public class ParallelPeekStreamGroupSum extends GroupSum {
-
     private final OneGroupSum[] tasks;
 
     public ParallelPeekStreamGroupSum(int[][] numberGroups) {
@@ -26,6 +25,4 @@ public class ParallelPeekStreamGroupSum extends GroupSum {
                 .mapToInt(OneGroupSum::getSum)
                 .sum();
     }
-
-
 }
